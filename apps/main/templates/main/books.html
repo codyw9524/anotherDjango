@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Book Reviews</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}">
+</head>
+<body>
+	<div class="container">
+		<div id="header">
+			<h4>Welcome, {{current_user.name}}</h4>
+			<a href="/books/new">Add Book and Review</a>
+			<a href="/logout">Logout</a>
+		</div>
+		<div class="half-size">
+			<h4>Recent Book Reviews</h4>
+			<ul>
+				{% for review in recent_book_reviews %}
+					<h6>{{review.book.title}}</h6>
+					<ul>
+						<li>Rating <span>{{review.rating}}</span></li>
+						<li><a href="/users/{{review.user.id}}">{{review.user.name}}</a> says: {{review.review}}</li>
+					</ul>
+				{% endfor %}
+			</ul>
+		</div>
+		<div class="half-size">
+			<h4>Other Books with Reviews</h4>
+			<ul>
+			{% for book in other_book_reviews %}
+
+				<li><a href="/books/{{book.id}}">{{book.title}}</a></li>
+			{% endfor %}
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
